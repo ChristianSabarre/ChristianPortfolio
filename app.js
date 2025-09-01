@@ -422,6 +422,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//python cert 01
+document.addEventListener('DOMContentLoaded', () => {
+    const viewBtn = document.getElementById('pythonbasic-pdf-view-btn');
+    const downloadLink = document.getElementById('pythonbasic-pdf-download');
+    const modal = document.getElementById('pdf-modal');
+    const modalClose = document.getElementById('pdf-modal-close');
+    const pdfViewer = document.getElementById('pdf-viewer');
+
+    const staticPdfPath = 'assets/pythonb_cert_01.pdf';
+
+    function openModal() {
+        if (!modal) return;
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        if (!modal) return;
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        if (pdfViewer) pdfViewer.src = '';
+    }
+
+    if (downloadLink) {
+        downloadLink.href = staticPdfPath;
+        downloadLink.classList.remove('hidden');
+    }
+
+    if (viewBtn) {
+        viewBtn.disabled = false;
+        viewBtn.addEventListener('click', () => {
+            if (pdfViewer) pdfViewer.src = staticPdfPath;
+            openModal();
+        });
+    }
+
+    if (modalClose) {
+        modalClose.addEventListener('click', () => {
+            closeModal();
+        });
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+});
+
 // Power BI PDF view for Finals project (static PDF)
 document.addEventListener('DOMContentLoaded', () => {
     const viewBtn = document.getElementById('finals-pdf-view-btn');
